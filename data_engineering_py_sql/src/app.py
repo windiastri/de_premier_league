@@ -59,13 +59,15 @@ get_premier_league_standings_sql_query = """
 # Read football data into dataframe
 final_standings_df = pd.read_sql(get_premier_league_standings_sql_query, postgres_connection)
 
-
-# Remove the index displayed
-# final_standings_df.set_index('position', inplace=True)
+print(final_standings_df)
 
 
-# Close database connection
-postgres_connection.close()
+# # Remove the index displayed
+# # final_standings_df.set_index('position', inplace=True)
+
+
+# # Close database connection
+# postgres_connection.close()
 
 
 # Set the page configuration of the app
@@ -77,14 +79,15 @@ st.set_page_config(
 
 
 # # Create title
-st.title("⚽🏆 Premier League Table Standings 2023/24 ⚽🏆") 
+
+st.title(f"⚽🏆 Premier League Table Standings {SEASON} ⚽🏆") 
 st.write("")
 
 
 # # Display instructions
 st.sidebar.title('Instructions 📖')
-st.sidebar.write("""
-The table showcases the current Premier League standings for the 2023/24 season. Toggle visualizations to gain deeper insights!
+st.sidebar.write(f"""
+The table showcases the current Premier League standings for the {SEASON} season. Toggle visualizations to gain deeper insights!
 """)
 
 
@@ -92,7 +95,7 @@ show_visualization = st.sidebar.radio('Would you like to view the standings as a
 fig_specification  = px.bar(final_standings_df, 
                         x           =   'team', 
                         y           =   'points', 
-                        title       =   'Premier League Standings 2023/24', 
+                        title       =   f'Premier League Standings {SEASON}', 
                         labels      =   {'points':'Points', 'team':'Team', 'goals_for': 'Goals Scored', 'goals_against': 'Goals Conceded', 'goal_difference':'Goal Difference'},
                         color       =   'team',
                         height      =   700,

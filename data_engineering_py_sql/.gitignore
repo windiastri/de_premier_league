@@ -1,8 +1,0 @@
-.env
-__pycache__/
-*.log
-/lib/*
-/etc/*
-/include/*
-/share/*
-/bin/*
